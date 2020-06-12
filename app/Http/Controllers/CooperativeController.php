@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cooperative;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CooperativeController extends Controller
 {
@@ -36,6 +37,20 @@ class CooperativeController extends Controller
      */
     public function store(Request $request, Cooperative $cooperative)
     {
+
+
+        $validator = Validator::make($request->all(),[
+            'libelle' => 'required|unique:cooperatives'
+        ]);
+
+
+        if ($validator->fails())
+        {
+
+            return response()->json($validator->messages(), 400);
+        }
+
+
         $cooperative->libelle = $request->input('libelle');
         $cooperative->save();
         return response()->json($cooperative);

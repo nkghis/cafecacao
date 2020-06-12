@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Producteur;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProducteurController extends Controller
 {
@@ -36,6 +37,23 @@ class ProducteurController extends Controller
      */
     public function store(Request $request, Producteur $producteur)
     {
+        $validator = Validator::make($request->all(),[
+            'nom' => 'required',
+            'prenom' => 'required',
+            'datenaiss' => 'required',
+            'localite' => 'required',
+            'cooperative_id' => 'required'
+
+        ]);
+
+
+        if ($validator->fails())
+        {
+
+            return response()->json($validator->messages(), 400);
+        }
+
+
         $producteur->nom = $request->input('nom');
         $producteur->prenom = $request->input('prenom');
         $producteur->datenaiss = $request->input('datenaiss');

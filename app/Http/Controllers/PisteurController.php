@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Pisteur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class PisteurController extends Controller
 {
@@ -37,6 +38,21 @@ class PisteurController extends Controller
      */
     public function store(Request $request, Pisteur $pisteur)
     {
+        $validator = Validator::make($request->all(),[
+            'login' => 'required|unique:pisteurs',
+            'nom' => 'required',
+            'prenom' => 'required',
+            'motdepasse' => 'required',
+
+        ]);
+
+
+        if ($validator->fails())
+        {
+
+            return response()->json($validator->messages(), 400);
+        }
+
         $pisteur->login = $request->input('login');
         $pisteur->nom = $request->input('nom');
         $pisteur->prenom = $request->input('prenom');
@@ -118,7 +134,18 @@ class PisteurController extends Controller
 
     public function auth(Request $request)
     {
+        $validator = Validator::make($request->all(),[
+            'login' => 'required',
+            'motdepasse' => 'required'
 
+        ]);
+
+
+        if ($validator->fails())
+        {
+
+            return response()->json($validator->messages(), 400);
+        }
 
 
 
@@ -127,7 +154,7 @@ class PisteurController extends Controller
 
         $pisteur = Pisteur::where('login', '=', $login)->first();
 
-        //dd($pisteur);
+
 
         if(!$pisteur)
         {

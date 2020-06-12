@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Produit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProduitController extends Controller
 {
@@ -34,9 +35,26 @@ class ProduitController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Produit $produit)
     {
-        //
+
+        $validator = Validator::make($request->all(),[
+            'libelle' => 'required|unique:produits',
+
+
+        ]);
+
+
+
+        if ($validator->fails())
+        {
+
+            return response()->json($validator->messages(), 400);
+        }
+
+        $produit->libelle = $request->input('libelle');
+        $produit->save();
+        return response()->json($produit);
     }
 
     /**

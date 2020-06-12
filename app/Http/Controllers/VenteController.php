@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Vente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class VenteController extends Controller
 {
@@ -36,6 +37,24 @@ class VenteController extends Controller
      */
     public function store(Request $request, Vente $vente)
     {
+        $validator = Validator::make($request->all(),[
+            'poids' => 'required|integer',
+            'montant' => 'required|integer',
+            'date' => 'required|',
+            'pisteur_id' => 'required',
+            'producteur_id' => 'required',
+            'produit_id' => 'required',
+
+        ]);
+
+
+        if ($validator->fails())
+        {
+
+            return response()->json($validator->messages(), 400);
+        }
+
+
         $vente->poids = $request->input('poids');
         $vente->montant = $request->input('montant');
         $vente->date = $request->input('date');
