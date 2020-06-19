@@ -1,6 +1,8 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades;
 
 class CreateSeederForTablePisteur extends Seeder
 {
@@ -11,13 +13,30 @@ class CreateSeederForTablePisteur extends Seeder
      */
     public function run()
     {
-        /*DB::table('pisteurs')->insert(
+        DB::table('pisteurs')->insert([
+
             [
-                'libelle' => 'CACAO',
+                'login' => 'nkghis',
+                'nom' => 'N\'KAGOU',
+                'prenom' => 'GHISLAIN',
+                'motdepasse' => Hash::make('123456'),
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
             ],
+
             [
-                'libelle' => 'CAFE'
-            ]
-        );*/
+                'login' => 'kacjea',
+                'nom' => 'KACOU',
+                'prenom' => 'JEANNETTE',
+                'motdepasse' => Hash::make('123456'),
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+
+            ],
+
+
+
+
+        ]);
     }
 }

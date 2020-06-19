@@ -17,6 +17,7 @@ class CreateSeederForTableProducteur extends Seeder
 
                 [
                     'nom' => 'KOUADIO',
+                    'reference' => '0000001',
                     'prenom' => 'ALPHONSE',
                     'datenaiss' => Carbon::now(),
                     'localite' => 'GRAND ZATTRY',
@@ -26,6 +27,7 @@ class CreateSeederForTableProducteur extends Seeder
                 ],
                 [
                     'nom' => 'OUEDRAOGO',
+                    'reference' => '0000002',
                     'prenom' => 'BOUKARY',
                     'datenaiss' => Carbon::now(),
                     'localite' => 'MEAGUI',
@@ -35,6 +37,7 @@ class CreateSeederForTableProducteur extends Seeder
                 ],
                 [
                     'nom' => 'KOUASSI',
+                    'reference' => '0000003',
                     'prenom' => 'KOUASSI BENOIT',
                     'datenaiss' => Carbon::now(),
                     'localite' => 'TAPEGUIA',
@@ -44,6 +47,7 @@ class CreateSeederForTableProducteur extends Seeder
                 ],
                 [
                     'nom' => 'TAPE',
+                    'reference' => '0000004',
                     'prenom' => 'GNABO FLORENTIN IGNACE',
                     'datenaiss' => Carbon::now(),
                     'localite' => 'GRAND ZATTRY',

@@ -65,7 +65,17 @@ class ProduitController extends Controller
      */
     public function show($id)
     {
-        //
+
+        $produit = Produit::where('libelle', '=', $id)->first();
+
+        if(!$produit)
+        {
+            return response()->json('Désolé produit non trouvé', 404);
+        }
+        else
+        {
+            return response()->json($produit);
+        }
     }
 
     /**

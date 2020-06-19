@@ -39,6 +39,7 @@ class ProducteurController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'nom' => 'required',
+            'reference' => 'required|unique:producteurs',
             'prenom' => 'required',
             'datenaiss' => 'required',
             'localite' => 'required',
@@ -55,6 +56,7 @@ class ProducteurController extends Controller
 
 
         $producteur->nom = $request->input('nom');
+        $producteur->reference = $request->input('reference');
         $producteur->prenom = $request->input('prenom');
         $producteur->datenaiss = $request->input('datenaiss');
         $producteur->localite = $request->input('localite');
@@ -71,7 +73,16 @@ class ProducteurController extends Controller
      */
     public function show($id)
     {
-        //
+        $producteur = Producteur::where('reference', '=', $id)->first();
+
+        if(!$producteur)
+        {
+            return response()->json('Désolé producteur non trouvé', 404);
+        }
+        else
+        {
+            return response()->json($producteur);
+        }
     }
 
     /**

@@ -8,7 +8,7 @@ class Pisteur extends Model
 {
 
     protected $hidden = [
-                            'id',
+                            /*'id',*/
                             'login',
                             'motdepasse',
                             'updated_at',

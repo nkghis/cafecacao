@@ -15,6 +15,7 @@ class CreateProducteursTable extends Migration
     {
         Schema::create('producteurs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('reference')->unique();
             $table->string('nom');
             $table->string('prenom');
             $table->date('datenaiss');
